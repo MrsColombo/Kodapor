@@ -2,7 +2,7 @@
 
 // Använd denna både vid generering av arbetssökande och arbetsgivare:
 
-$query = "INSERT INTO applier_account (username, password) VALUES ($username, $password);";
+$query = "INSERT INTO accounts (username, password) VALUES ($username, $password);";
 
 // För generering av arbetssökande till databasen: 
  
