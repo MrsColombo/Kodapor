@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html>  
+<html ng-app="computenzApp">  
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="php/caljac/"></script>
+
+    <!--  Fyll i sökvägen till din htdocs --> 
+    <base href="/" />
+  
   </head>
   <body>
     
+    <a href="login">Login</a>
+
+    <div ng-view></div>
+  
   </body>
 </html>
