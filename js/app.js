@@ -1,14 +1,14 @@
-
-(function(){
-
   'use strict';
 
-  computenzApp = angular.module('computenzApp', [
+var computenzApp = angular.module('computenzApp', [
     'ngRoute',
     'computenzControllers'
   ]);
 
-  computenzApp.config(['$routeProvider'],
+computenzApp.config(['$locationProvider', function($locationProvider){
+  $locationProvider.html5Mode(true);
+}]);
+  computenzApp.config(['$routeProvider',
     function($routeProvider){
       $routeProvider.
         when('/register', {
@@ -27,6 +27,4 @@
           templateUrl: 'partials/browse.html',
           controller: 'BrowseCtrl'
         });
-    });
-
-}());
+    }]);

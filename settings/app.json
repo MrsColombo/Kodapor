@@ -21,8 +21,11 @@
       "less.js",
         "jquery.js",
         "jquery.ui.js",
+        "angular.js",
+        "angular-route.js",
         "...",
-        "js.js"
+        "app.js",
+        "controllers.js"
     ],
 
     "loadOrderCSS": [

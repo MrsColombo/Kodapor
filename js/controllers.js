@@ -1,9 +1,6 @@
-
-(function(){
-
   'use strict';
 
-  computenzControllers = angular.module('computenzControllers', []);
+var computenzControllers = angular.module('computenzControllers', []);
 
   computenzControllers.controller('RegCtrl', ['$scope','$http',
     function($scope,$http) {
@@ -28,5 +25,3 @@
     function($scope,$http) {
 
     }]);
-
-}());
