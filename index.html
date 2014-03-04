@@ -31,8 +31,14 @@
       </div>
     </div>
 
+    <!-- Till Joel: Länken nedan ska du nu kunna lägga i navigationsfältet eller var du vill 
+          Du kan även använda funktionen  {{ getFullName() }} om du vill visa namnet efter
+          man har loggat in (vill du bara visa förnamnet måste funktionen i controllern bytas ut). 
+          För att kolla om någon är inloggad använder du funktionen 
+          {{ loginStatus() && 'annan funktion du vill utföra om inloggad' }} eller
+          {{ loginStatus() || 'annan funktion du vill utföra om ej inloggad }} 
+    -->
     <!-- go to login view if not already logged in, else logout and return to homepage -->
-
     <a ng-href="{{whereToGo.link}}" ng-click="whereToGo.text == 'logout' && logOut()"> {{ whereToGo.text }} </a>
 
     <div ng-view></div>
