@@ -1,60 +1,63 @@
-  'use strict';
+'use strict';
 
 var computenzControllers = angular.module('computenzControllers', []);
 
-  computenzControllers.controller('RegCtrl', ['$scope','$http',
-    function($scope,$http) {
+computenzControllers.controller('appCtrl', ['$scope','$http','UserService','LoginToggleService',
+  function($scope,$http, UserService, LoginToggleService) {
+    
+    $scope.updateLogin = function(statusObj) {
+      $scope.whereToGo = statusObj;
+    };
 
-    }]);
+    $scope.logOut = function() {
+      var requestData = {loginHandlerAction: 'logOut'};
+      $http.post('php/main.php', requestData).success(function(data){
+        UserService.unsetUser();
+        LoginToggleService.setLinkData(false);
+      });
+    };
 
-  computenzControllers.controller('LoginCtrl', ['$scope','$http','$location', 'UserService',
-    function($scope,$http,$location,UserService) {
-      $scope.sendForm = function(){
-        $http.get('/php/main.php/loginHandlerAction=login&username=' + $scope.user.username + '&password=' + $scope.user.password).success(function(data){
-          if(data.authenticated === true && data.username === $scope.user.username){
-            UserService.setUsername(data.username);
-            //$location.path('/home');
-            $scope.message = 'Your login succeeded';
-          }else{
-            $scope.message = 'Your login failed';
-          }
-        });
+    $scope.updateLogin(LoginToggleService.getLinkData());
+
+}]);
+
+computenzControllers.controller('RegCtrl', ['$scope','$http', function($scope,$http) {
+
+}]);
+
+computenzControllers.controller('LoginCtrl', ['$scope','$http','$location', 'UserService', 'LoginToggleService',
+  function($scope,$http,$location,UserService,LoginToggleService) {
+
+    $scope.sendForm = function(){
+
+      var requestData = {
+        loginHandlerAction: 'login',
+        username: $scope.user.username,
+        password: $scope.user.password
       };
-    }]).service('UserService', function(){
-      var user = {
-        username: null,
-        firstname: null,
-        lastname: null
-      };
 
-      return {
-        getUsername: function(){
-          console.log('userService get', user.username);
-          return user.username;
-        },
-        setUsername: function(n){
-          user.username = n;
-          console.log('userService set', n, user.username);
-        },
-
-        call: function(prop,val){
-          if(val){
-            user[prop] = val;
-          }
-          return user[prop];
+      // Test: PerCenterwall GzrTCRljCu
+      
+      $http.post('php/main.php', requestData).success(function(data){
+        if(data && data.username === $scope.user.username){
+          UserService.setUser(data);
+          LoginToggleService.setLinkData(true);
+          $location.path('profile/' + UserService.getUsername());
+          $scope.message = 'Your login succeeded';
+        }else{
+          $scope.message = data;
         }
-      };
+      });
+    };
 
-    });
+}]);
 
 
 
-  computenzControllers.controller('ProfileCtrl', ['$scope', '$routeParams',
-    function($scope,$http) {
+computenzControllers.controller('ProfileCtrl', ['$scope','$routeParams','UserService', function($scope,$routeParams, UserService) {
+  $scope.getFullName = UserService.getFullName;
+}]);
 
-    }]);
+computenzControllers.controller('BrowseCtrl', ['$scope','$http', function($scope,$http) {
 
-  computenzControllers.controller('BrowseCtrl', ['$scope','$http',
-    function($scope,$http) {
-
-    }]);
+}]);

@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html ng-app="computenzApp">  
+
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="php/caljac/"></script>
 
     <!--  Fyll i sökvägen till din htdocs --> 
-    <base href="/Kodapor/" />
+    <base href="/plush/delkurs-7/Kodapor/" />
   
   </head>
-  <body>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  
+  <body ng-controller="appCtrl">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,7 +30,10 @@
         </div>
       </div>
     </div>
-    <a href="login">Login</a>
+
+    <!-- go to login view if not already logged in, else logout and return to homepage -->
+
+    <a ng-href="{{whereToGo.link}}" ng-click="whereToGo.text == 'logout' && logOut()"> {{ whereToGo.text }} </a>
 
     <div ng-view></div>
   

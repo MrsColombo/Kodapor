@@ -2,7 +2,8 @@
 
 var computenzApp = angular.module('computenzApp', [
     'ngRoute',
-    'computenzControllers'
+    'computenzControllers',
+    'computenzServices'
   ]);
 
 computenzApp.config(['$locationProvider', function($locationProvider){
@@ -26,5 +27,8 @@ computenzApp.config(['$locationProvider', function($locationProvider){
         when('/browse', {
           templateUrl: 'partials/browse.html',
           controller: 'BrowseCtrl'
+        }).
+        when('home', {
+          redirectTo: 'index.html'
         });
     }]);
